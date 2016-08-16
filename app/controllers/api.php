@@ -297,6 +297,7 @@ class Api extends FrontendController
         // authentication successful, save this in the session
         // effectively "logging in the user"
         $this->session->set_userdata('user_id', $user['id']);
+        $this->session->set_userdata('email_hash', $user['email_hash']);
         // set is_admin if applicable (null will delete is_admin = true)
         $this->session->set_userdata('is_admin', ($user['role'] == 2) ? true : null);
 
@@ -305,9 +306,10 @@ class Api extends FrontendController
         $r['eligible'] = $this->prizeModel->isEligible(
             $user['id'],
             $this->site_id);
-        $r['midnight'] = strtotime('tomorrow');
-        $r['name']     = $user['firstname'];
-        $r['user_id']  = $user['id'];
+        $r['midnight']   = strtotime('tomorrow');
+        $r['name']       = $user['firstname'];
+        $r['user_id']    = $user['id'];
+        $r['email_hash'] = $user['email_hash'];
 
         if (!$r['eligible']) {
             // include thank you THML if you've already entered today

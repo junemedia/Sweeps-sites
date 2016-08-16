@@ -98,6 +98,7 @@ define([
             db('lis', null);
             db('user_id', null);
             db('name', null);
+            db('email_hash', null);
             db('ineligible', null);
             cookie('sid', null);
             ROADUNBLOCKED = null;
@@ -183,6 +184,7 @@ define([
                 db('user_id', response.user_id, ONE_YEAR);
                 // $name.html(response.name);
                 db('name', response.name, ONE_YEAR);
+                db('email_hash', response.email_hash, ONE_YEAR);
                 // If we get back the thank you HTML, save it.
                 // This should only occur if a user is ineligible,
                 // but let's just store it whenever we get it.

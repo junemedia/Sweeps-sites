@@ -99,6 +99,9 @@ class UserModel extends CI_Model
         $result = $query->row_array();
         $query->free_result();
 
+        // for LiveRamp tag
+        $result['email_hash'] = sha1(strtolower($email));
+
         if (!$result || @$result['error'] == 'USER_NOT_FOUND') {
             return null;
         } elseif (@$result['error'] == 'INVALID_PASSWORD') {
