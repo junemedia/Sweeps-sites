@@ -122,6 +122,7 @@
 
   <?php $this->load->view("ads/$site_slug/underdog"); ?>
   <?php $this->load->view("ads/$site_slug/swoop"); ?>
+  <?php $this->load->view("ads/$site_slug/liveconnect"); ?>
 
 </body>
 </html>
