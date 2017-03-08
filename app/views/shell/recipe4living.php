@@ -184,33 +184,15 @@
           </div>
           <div id="panel-right" class="column">
             <div class="ad" data-id="300x250_ATF"></div>
-            <?php /*
-            <div class="our_best">
-              <h2>Our Best Recipe Collections</h2>
-              <div class="content">
-                <a href="http://www.recipe4living.com/recipes/baked_chicken_and_mozzarella_salad.htm"><img alt="Baked Chicken and Mozzarella Salad" src="http://www.recipe4living.com/assets/itemimages/280/125/3/default_2f4e92c8484363c0a922b75aaebc62db_dreamstimesmall_47614245.jpg" width="280" height="125"/></a>
-                <div class="recipe_desc">
-                  <h2><a href="http://www.recipe4living.com/recipes/baked_chicken_and_mozzarella_salad.htm">Baked Chicken and Mozzarella Salad</a></h2>
-                </div>
-              </div>
-            </div>
-            */ ?>
             <div class="clear"></div>
+
             <div class="ad">
               <div class="ad" data-id="300x250_BTF"></div>
-              <div style="font-family:Arial color:#000000; font-size:18px; font-weight:bold !important; margin-bottom:5px;">Around The Web</div>
-              <div class="ad" data-id="zergnet-widget-29019"></div>
-              <div class="screenonly">
-                <br>
-                <!-- begin ZEDO 3 for channel:  R4L_LP_HouseAds_300x250 , publisher: AmpereMedia , Ad Dimension: Medium Rectangle - 300 x 250 -->
-                <script>
-netseer_tag_id = "2358";
-netseer_ad_width = "300";
-netseer_ad_height = "100";
-netseer_task = "ad";
-                </script>
-                <script src="http://contextlinks.netseer.com/dsatserving2/scripts/netseerads.js"></script>
-              </div>
+
+              <?php $this->load->view("ads/$site_slug/zergnet-29019"); ?>
+
+              <?php $this->load->view("ads/$site_slug/netseer"); ?>
+
             </div>
           </div>
           <div class="clear"></div>
