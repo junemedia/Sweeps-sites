@@ -193,6 +193,8 @@
 
               <?php $this->load->view("ads/$site_slug/netseer"); ?>
 
+              <?php $this->load->view("ads/$site_slug/outbrain-tf_2"); ?>
+
             </div>
           </div>
           <div class="clear"></div>
@@ -350,6 +352,7 @@
   <?php $this->load->view("ads/$site_slug/underdog"); ?>
   <?php $this->load->view("ads/$site_slug/swoop"); ?>
   <?php $this->load->view("ads/$site_slug/liveconnect"); ?>
+  <?php $this->load->view("ads/$site_slug/outbrain_js"); ?>
 
 </body>
 </html>
