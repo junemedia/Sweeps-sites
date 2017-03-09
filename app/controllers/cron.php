@@ -58,26 +58,26 @@ class Cron extends CI_Controller
     //var_dump($user);
 
     if ($user == -1) {
-      return $this->error($this->ERROR, 'No contest exists on ' . $date . '.');
+      return $this->logItem($this->ERROR, 'No contest exists on ' . $date . '.');
     }
     elseif ($user == -2) {
-      return $this->error($this->ERROR, 'We do not have any other entries on ' . $date . '.');
+      return $this->logItem($this->ERROR, 'We do not have any other entries on ' . $date . '.');
     }
     elseif (@$user['id'] >= 1) {
       // grab all of the information for this contest:
       $winner = $this->prizeModel->getWinnersByDateRange($date);
       if (!$winner) {
-        return $this->error($this->ERROR, 'Winner picked, but then $this->getWinnersByDateRange(' . $date . ') failed.');
+        return $this->logItem($this->ERROR, 'Winner picked, but then $this->getWinnersByDateRange(' . $date . ') failed.');
       }
       $winner = array_shift($winner);
       $this->sendMail($winner);
     }
-    else{
-      return $this->error($this->ERROR, 'Unexpected error from $this->adminModel->pickWinner(' . $date . ').');
+    else {
+      return $this->logItem($this->ERROR, 'Unexpected error from $this->adminModel->pickWinner(' . $date . ').');
     }
   }
 
-  protected function error($msg, $status = 3)
+  protected function logItem($status = 3, $msg)
   {
     $trace  = debug_backtrace();
     $caller = (@$trace[1]['class'] ? $trace[1]['class'] . '::' : '') . $trace[1]['function'];
