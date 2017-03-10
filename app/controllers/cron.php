@@ -3,9 +3,11 @@
 class Cron extends CI_Controller
 {
   protected $debug               = true;
-  protected $error_log           = '';
-  protected $error_log_email     = null;
-  protected $error_log_file      = '/tmp/dailysweeps-cron-error.log';
+  protected $log                 = '';
+  protected $log_email           = null;
+  protected $log_dir             = '/srv/sites/dailysweeps/bin/logs';
+  protected $log_file            = '';
+  protected $INFO                = 4;
   protected $WARN                = 3;
   protected $ERROR               = 2;
   protected $FATAL               = 1;
@@ -13,6 +15,7 @@ class Cron extends CI_Controller
                                      1 => 'FATAL',
                                      2 => 'ERROR',
                                      3 => 'WARN',
+                                     4 => 'INFO',
                                    );
   protected $yesterday;
   protected $today;
@@ -27,14 +30,15 @@ class Cron extends CI_Controller
 
     $this->yesterday = date('Y-m-d', strtotime('-1 day'));
     $this->today     = date('Y-m-d');
+    $this->log_file  = $this->log_dir . '/' . $this->today . '.log';
   }
 
   public function __destruct()
   {
-    if (!$this->error_log) {
+    if (!$this->log) {
       return;
     }
-    @file_put_contents($this->error_log_file, $this->error_log, FILE_APPEND);
+    @file_put_contents($this->log_file, $this->log, FILE_APPEND);
   }
 
   /**
@@ -82,11 +86,8 @@ class Cron extends CI_Controller
     $trace  = debug_backtrace();
     $caller = (@$trace[1]['class'] ? $trace[1]['class'] . '::' : '') . $trace[1]['function'];
 
-    if ($status < 3) {
-      $this->error_log .= '[' . date('Y-m-d H:i:s') . '] ' . $this->ERROR_STATUS_BY_INT[$status] . ' ' . $caller . PHP_EOL . $msg . PHP_EOL;
-    }
-    if ($this->debug) {
-      print_r($msg);
+    if ($status < 3 || $this->debug) {
+      $this->log .= '[' . date('Y-m-d H:i:s') . '] ' . $this->ERROR_STATUS_BY_INT[$status] . ' ' . $caller . PHP_EOL . $msg . PHP_EOL;
     }
     if ($status == 1) {
       // FATAL

@@ -6,6 +6,9 @@ node_modules
 .nfs*
 nbproject
 
+# cron logs
+bin/logs/*
+
 web/*.sql.*
 *.html.gz
 *.js.gz
