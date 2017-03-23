@@ -163,7 +163,7 @@ PICK_WINNER_SPROC:BEGIN
     DECLARE existing_contest TINYINT(1) DEFAULT NULL;
     DECLARE existing_winner_id,
             new_winner_user_id,
-            new_winner_site_id SMALLINT(5) DEFAULT NULL;
+            new_winner_site_id BIGINT(10) DEFAULT NULL;
 
     -- check if the contest date exists and if a winner has already been chosen
     SELECT
