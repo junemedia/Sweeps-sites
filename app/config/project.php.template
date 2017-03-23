@@ -11,8 +11,7 @@ $config['token_ttl']                      = 86400; // 1 day
 $config['human_ttl']                      = 86400; // 1 day
 
 // Who will be BCC’d on winner emails:
-$config['admin_emails'][]                 = 'contestadmin@junemedia.com';
-$config['admin_emails'][]                 = 'johns@junemedia.com';
+$config['admin_email']                    = 'contestadmin@junemedia.com';
 
 // The "From:" address for the winner emails:
 // Organized by "site_slug" (`site`.`slug`);
@@ -26,3 +25,9 @@ $config['from']['default']['email']       = '';
 
 $config['prize_image_dir']                = rtrim($_SERVER['DOCUMENT_ROOT'], '/') . '/pimg';
 $config['prize_image_uri']                = '/pimg';
+
+// Maropost account info
+$config['maropost']['account_id']         = '';
+$config['maropost']['api_key']            = '';
+$config['maropost']['campaign_id']        = '';
+$config['maropost']['content_id']         = '';

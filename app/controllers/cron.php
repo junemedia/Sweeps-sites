@@ -38,6 +38,7 @@ class Cron extends CI_Controller
     if (!$this->log) {
       return;
     }
+    $this->log .= "\n************************************************\n\n";
     @file_put_contents($this->log_file, $this->log, FILE_APPEND);
   }
 
@@ -58,9 +59,12 @@ class Cron extends CI_Controller
     $this->load->model('prizeModel');
 
     $user = $this->adminModel->pickWinner($date);
-
-    //var_dump($user);
-
+    /*
+     * possible values for $user:
+     *   -1: no contest set for this $date
+     *   -2: no eligible entries for this $date
+     *   array of user data: `id`, `firstname`, `lastname`, `email`, `city`, `state`
+     */
     if ($user == -1) {
       return $this->logItem($this->ERROR, 'No contest exists on ' . $date . '.');
     }
@@ -68,12 +72,17 @@ class Cron extends CI_Controller
       return $this->logItem($this->ERROR, 'We do not have any other entries on ' . $date . '.');
     }
     elseif (@$user['id'] >= 1) {
+      $this->logItem($this->INFO, 'Winner id: ' . $user['id']);
+      $this->logItem($this->INFO, 'Winner email: ' . $user['email']);
+
       // grab all of the information for this contest:
       $winner = $this->prizeModel->getWinnersByDateRange($date);
       if (!$winner) {
         return $this->logItem($this->ERROR, 'Winner picked, but then $this->getWinnersByDateRange(' . $date . ') failed.');
       }
       $winner = array_shift($winner);
+      $this->logItem($this->INFO, print_r($winner, true));
+
       $this->sendMail($winner);
     }
     else {
@@ -97,8 +106,7 @@ class Cron extends CI_Controller
 
   protected function sendMail($params)
   {
-    $this->load->library('email');
-    $this->load->library('parser');
+    $this->load->library('maropost', config_item('maropost'));
 
     $params['date_pretty'] = date('F j, Y', strtotime($params['date']));
 
@@ -112,29 +120,35 @@ class Cron extends CI_Controller
       $from_email = $froms['default']['email'];
       $from_name  = $froms['default']['name'];
     }
+    $this->maropost->from(array(
+      'email'    => $from_email,
+      'name'     => $from_name,
+      'reply_to' => config_item('admin_email')
+    ));
 
-    // winner email
-    $this->email->from($from_email, $from_name);
-    $this->email->to($params['user_email']);
-    $this->email->bcc(config_item('admin_emails'));
-    $this->email->subject($params['site_name'] . ' Winner Notification');
-
-    switch ($params['prize_type']) {
-      case "giftcard":
-        $tpl = 'winner_giftcard';
-        break;
-
-      case "prize":
-
-      default:
-        $tpl = 'winner_prize';
-    }
+    $this->maropost->to($params['user_email']);
+    $this->maropost->bcc(config_item('admin_email'));
+    $this->maropost->subject($params['site_name'] . ' Winner Notification');
 
     // remove any HTML tags in the prize title
     $params['prize_title'] = safeTitle($params['prize_title']);
 
-    $body = $this->parser->parse('../templates/' . $tpl, $params, true);
-    $this->email->message($body);
-    $this->email->send();
+    // tags
+    $this->maropost->tags('winner_email', $params['user_email']);
+    $this->maropost->tags('prize_title', $params['prize_title']);
+    $this->maropost->tags('prize_value', $params['prize_value']);
+    $this->maropost->tags('prize_date', $params['date_pretty']);
+    $this->maropost->tags('site_name', $params['site_name']);
+    $this->maropost->tags('site_domain', $params['site_domain']);
+
+    $response = $this->maropost->send_transaction();
+
+    $recd = $response['recd'];
+    $postfields = print_r($response['sent']['postfields'], true);
+    $info = print_r($response['sent']['info'], true);
+
+    $this->logItem($this->INFO, "POST data: $postfields");
+    $this->logItem($this->INFO, "cURL info: $info");
+    $this->logItem($this->INFO, "cURL response: $recd");
   }
 }

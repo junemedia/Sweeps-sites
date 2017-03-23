@@ -165,7 +165,7 @@ PICK_WINNER_SPROC:BEGIN
             new_winner_user_id,
             new_winner_site_id SMALLINT(5) DEFAULT NULL;
 
-    -- check if the contest exists
+    -- check if the contest date exists and if a winner has already been chosen
     SELECT
         1,
         IF(`winner_user_id` IS NULL, 0, `winner_user_id`)
@@ -177,12 +177,14 @@ PICK_WINNER_SPROC:BEGIN
     WHERE
         `date` = IN_DATE;
 
+    -- if no contest is set for the date, return -1
     IF existing_contest IS NULL THEN
         -- (int) -1: Contest (IN_DATE) does not exist
         SELECT -1 AS `error`;
         LEAVE PICK_WINNER_SPROC;
     END IF;
 
+    -- let's pick a winner...
     SELECT
         `user_id`,
         `site_id`
@@ -193,8 +195,10 @@ PICK_WINNER_SPROC:BEGIN
         `entry`
     WHERE
         `date` = IN_DATE
+    -- make sure we're not repicking the existing winner
     AND
         `user_id` != existing_winner_id
+    -- make sure they haven't won within 30 day time frame
     AND
         `user_id` NOT IN (
             SELECT
@@ -211,12 +215,14 @@ PICK_WINNER_SPROC:BEGIN
     LIMIT
         1;
 
+    -- I guess we weren't able to pick a winner
     IF new_winner_user_id IS NULL THEN
         -- (int) -2: (IN_DATE) does not have any entries
         SELECT -2 AS `error`;
         LEAVE PICK_WINNER_SPROC;
     END IF;
 
+    -- all is good, update the contest table with our new winner
     UPDATE
         `contest`
     SET
@@ -225,6 +231,7 @@ PICK_WINNER_SPROC:BEGIN
     WHERE
         `date` = IN_DATE;
 
+    -- get the user info and return it
     SELECT
         `id`,
         `firstname`,
