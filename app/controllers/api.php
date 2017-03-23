@@ -6,6 +6,21 @@
 
 class Api extends FrontendController
 {
+  protected $debug               = true;
+  protected $log                 = '';
+  protected $log_email           = null;
+  protected $log_dir             = '/srv/sites/dailysweeps/bin/logs';
+  protected $log_file            = '';
+  protected $INFO                = 4;
+  protected $WARN                = 3;
+  protected $ERROR               = 2;
+  protected $FATAL               = 1;
+  protected $ERROR_STATUS_BY_INT = array(
+                                     1 => 'FATAL',
+                                     2 => 'ERROR',
+                                     3 => 'WARN',
+                                     4 => 'INFO',
+                                   );
 
   public function __construct()
   {
@@ -16,6 +31,17 @@ class Api extends FrontendController
 
     // all responses here should never be cached
     $this->rdcache->expires(-1);
+
+    $this->log_file  = $this->log_dir . '/api.' . date('Y-m-d') . '.log';
+  }
+
+  public function __destruct()
+  {
+    if (!$this->log) {
+      return;
+    }
+    $this->log .= "\n************************************************\n\n";
+    @file_put_contents($this->log_file, $this->log, FILE_APPEND);
   }
 
   /**
@@ -621,6 +647,24 @@ class Api extends FrontendController
     }
     else {
       return false;
+    }
+  }
+
+  /**
+   * Just copied from cron.php
+   * would probably be best to break out into a seperate library
+   */
+  protected function _logItem($status = 3, $msg)
+  {
+    $trace  = debug_backtrace();
+    $caller = (@$trace[1]['class'] ? $trace[1]['class'] . '::' : '') . $trace[1]['function'];
+
+    if ($status < 3 || $this->debug) {
+      $this->log .= '[' . date('Y-m-d H:i:s') . '] ' . $this->ERROR_STATUS_BY_INT[$status] . ' ' . $caller . PHP_EOL . $msg . PHP_EOL;
+    }
+    if ($status == 1) {
+      // FATAL
+      exit;
     }
   }
 }
