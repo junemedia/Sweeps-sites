@@ -96,9 +96,9 @@
         <h4>Easy recipes and a helping of fun from home cooks like you.</h4></div>
       <div class="standardform screenonly">
         <div id="nav-links" class="screenonly text-content fr">
-          <ul>
+          <!--ul>
             <li> <a href="http://www.recipe4living.com/facebook/login/" id="sign_in"><span>Login</span></a> / <a href="http://www.recipe4living.com/register/" id="join_now"><span>Register</span></a> </li>
-          </ul>
+          </ul-->
         </div>
         <div class="formholder">
           <form id="nav-top-form-search" action="/search" method="get" class="search fullsubmit">
