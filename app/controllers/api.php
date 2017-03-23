@@ -9,7 +9,7 @@ class Api extends FrontendController
   protected $debug               = true;
   protected $log                 = '';
   protected $log_email           = null;
-  protected $log_dir             = '/srv/sites/dailysweeps/bin/logs';
+  protected $log_dir             = '/srv/sites/dailysweeps/bin/logs/api';
   protected $log_file            = '';
   protected $INFO                = 4;
   protected $WARN                = 3;
@@ -32,7 +32,7 @@ class Api extends FrontendController
     // all responses here should never be cached
     $this->rdcache->expires(-1);
 
-    $this->log_file  = $this->log_dir . '/api.' . date('Y-m-d') . '.log';
+    $this->log_file  = $this->log_dir . '/' . date('Y-m-d') . '.log';
   }
 
   public function __destruct()
@@ -431,6 +431,9 @@ class Api extends FrontendController
    */
   public function forgot()
   {
+    $reset_info = array();
+
+    /* ********** check for valid email address ********** */
     $this->load->library('form_validation');
     $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email|callback_properEmail');
 
@@ -438,16 +441,24 @@ class Api extends FrontendController
       return $this->json(XHR_INVALID, 'Please double check your email address');
     }
 
-    $email = $this->input->post('email');
+    $reset_info['email'] = $this->input->post('email');
 
     $this->load->model('userModel');
 
-    if (!$token = $this->userModel->getPasswordResetToken($email)) {
+    if (!$reset_info['token'] = $this->userModel->getPasswordResetToken($reset_info['email'])) {
       return $this->json(XHR_NOT_FOUND, 'We cannot find that email address.');
     }
 
-    $this->load->library('email');
-    $this->load->library('parser');
+    $this->_logItem($this->INFO, print_r($reset_info, true));
+
+    /* ********** send email with reset link ********** */
+    $maropost_config = config_item('maropost');
+    $maropost_config['campaign_id'] = '3032123';
+    $maropost_config['content_id']  = '2271825';
+
+    $this->_logItem($this->INFO, print_r($maropost_config, true));
+
+    $this->load->library('maropost', $maropost_config);
 
     // find correct "From:" in config/project.php:
     $froms = config_item('from');
@@ -459,14 +470,25 @@ class Api extends FrontendController
       $from_email = $froms['default']['email'];
       $from_name  = $froms['default']['name'];
     }
+    $this->maropost->from(array(
+      'email'    => $from_email,
+      'name'     => $from_name,
+      'reply_to' => config_item('admin_email')
+    ));
 
-    $params = array('link' => 'http://' . $_SERVER['HTTP_HOST'] . '/reset/' . $token);
-    $this->email->clear();
-    $this->email->from($from_email, $from_name);
-    $this->email->to($email);
-    $this->email->subject('Reset Your ' . $this->site_name . ' Sweepstakes Password');
-    $this->email->message($this->parser->parse('../templates/reset', $params, true));
-    $this->email->send();
+    $this->maropost->to($reset_info['email']);
+    $this->maropost->subject('Reset Your ' . $this->site_name . ' Sweepstakes Password');
+    $this->maropost->tags('reset_link', 'http://' . $_SERVER['HTTP_HOST'] . '/reset/' . $reset_info['token']);
+
+    $response = $this->maropost->send_transaction();
+
+    $recd = $response['recd'];
+    $postfields = print_r($response['sent']['postfields'], true);
+    $info = print_r($response['sent']['info'], true);
+
+    $this->_logItem($this->INFO, "POST data: $postfields");
+    $this->_logItem($this->INFO, "cURL info: $info");
+    $this->_logItem($this->INFO, "cURL response: $recd");
 
     return $this->json(XHR_OK, 'We’ve sent you an email with password reset instructions.');
   }
