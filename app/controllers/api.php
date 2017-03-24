@@ -366,12 +366,19 @@ class Api extends FrontendController
     $password = $this->input->post('password');
     $token    = $this->input->post('token');
 
+    $this->_logItem($this->INFO, print_r(array(
+      'password' => $password,
+      'token' => $token
+    ), true));
+
     $this->load->model('userModel');
 
     if (!$this->userModel->reset($token, $password, config_item('token_ttl'))) {
+      $this->_logItem($this->ERROR, 'Expired or invalid token');
       return $this->json(XHR_EXPIRED, 'Your reset token has expired or is invalid. Please reset your password again on the <a href="/">signup page</a>.');
     }
 
+    $this->_logItem($this->INFO, 'Password was reset');
     return $this->json(XHR_OK);
   }
 
