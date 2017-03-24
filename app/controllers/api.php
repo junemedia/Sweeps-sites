@@ -455,9 +455,6 @@ class Api extends FrontendController
     $maropost_config = config_item('maropost');
     $maropost_config['campaign_id'] = '3032123';
     $maropost_config['content_id']  = '2271825';
-
-    $this->_logItem($this->INFO, print_r($maropost_config, true));
-
     $this->load->library('maropost', $maropost_config);
 
     // find correct "From:" in config/project.php:
@@ -487,10 +484,16 @@ class Api extends FrontendController
     $info = print_r($response['sent']['info'], true);
 
     $this->_logItem($this->INFO, "POST data: $postfields");
-    $this->_logItem($this->INFO, "cURL info: $info");
     $this->_logItem($this->INFO, "cURL response: $recd");
 
-    return $this->json(XHR_OK, 'We’ve sent you an email with password reset instructions.');
+    // if we didn't get back a 200 OK response, log it and return an error
+    if ($response['sent']['info']['http_code'] !== 200) {
+      $this->_logItem($this->INFO, "cURL info: $info");
+      return $this->json(XHR_ERROR, "There's been an error, please try again.");
+    }
+    else {
+      return $this->json(XHR_OK, 'We’ve sent you an email with password reset instructions.');
+    }
   }
 
   /**
