@@ -90,6 +90,23 @@ class Cron extends CI_Controller
     }
   }
 
+
+  /**
+   * Cleans reset tokens from the database.
+   *
+   * @return void
+   */
+  public function clean_tokens()
+  {
+
+    $this->load->model('adminModel');
+
+    $result = $this->adminModel->clearResetTokens();
+    $logdata = $result ? 'true' : 'false';
+
+    $this->logItem($this->INFO, 'clearResetTokens: ' . $logdata);
+  }
+
   protected function logItem($status = 3, $msg)
   {
     $trace  = debug_backtrace();

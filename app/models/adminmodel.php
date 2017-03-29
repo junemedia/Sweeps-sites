@@ -274,4 +274,19 @@ class AdminModel extends CI_Model
                    $site_id);
     return $this->db->query($sql);
   }
+
+  /**
+   * Clean expired 'reset' tokens from `reset`
+   *
+   * @return  boolean
+   */
+  public function clearResetTokens()
+  {
+    $expiration = date('Y-m-d H:i:s', strtotime('-86400 seconds'));
+    return $this->db
+                ->where('type', 'reset')
+                ->where('timestamp <', $expiration)
+                ->delete('reset');
+  }
+
 }
