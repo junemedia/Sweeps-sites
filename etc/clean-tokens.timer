@@ -1,0 +1,9 @@
+[Unit]
+Description=Clean expired password reset tokens from database every 10 minutes
+
+[Timer]
+OnCalendar=*:0/10
+Unit=clean-tokens.service
+
+[Install]
+WantedBy=basic.target

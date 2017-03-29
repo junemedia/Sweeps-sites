@@ -1,0 +1,13 @@
+[Unit]
+Description=Clean expired password reset tokens from database
+Wants=clean-tokens.timer
+
+[Service]
+Type=simple
+Nice=19
+IOSchedulingClass=2
+IOSchedulingPriority=7
+ExecStart=/srv/sites/dailysweeps/bin/cron clean_tokens
+
+[Install]
+WantedBy=basic.target

@@ -43,32 +43,21 @@
 | [win.**recipe4living**.com](http://win.recipe4living.com/)     | [**recipe4living**.dailysweeps.white.resolute.com](http://recipe4living.dailysweeps.white.resolute.com/) |
 
 
-## Crontab Entries
-
-##### Daily Winner Selection
-
-    # dailysweeps: Generate reports every night at midnight PRECISELY
-    0    0 * * * root cd /srv/sites/dailysweeps && ./bin/cron daily
-
-##### Reports
-
-    # dailysweeps: Generate reports every night at 04:37am
-    37   4 * * * root cd /srv/sites/dailysweeps && ./bin/reports
-
-##### SystemD (CentOS 7) Timers
+## SystemD (CentOS 7) Timers
 
     # symlink unit files and timers
     cd /etc/systemd/system && \
     ln -s /srv/sites/dailysweeps/etc/jds-reports.service && \
     ln -s /srv/sites/dailysweeps/etc/jds-reports.timer && \
     ln -s /srv/sites/dailysweeps/etc/jds-daily.service && \
-    ln -s /srv/sites/dailysweeps/etc/jds-daily.timer
-
-**NOT FULLY WORKING YET (2015-03-23):**
+    ln -s /srv/sites/dailysweeps/etc/jds-daily.timer && \
+    ln -s /srv/sites/dailysweeps/etc/clean-tokens.service && \
+    ln -s /srv/sites/dailysweeps/etc/clean-tokens.timer
 
     # install and enable timers
     systemctl enable jds-reports.timer && systemctl start jds-reports.timer
     systemctl enable jds-daily.timer && systemctl start jds-daily.timer
+    systemctl enable clean-tokens.timer && systemctl start clean-tokens.timer
 
 
 ## Simple Templates
