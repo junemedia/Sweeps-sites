@@ -367,7 +367,6 @@ class Api extends FrontendController
     $token    = $this->input->post('token');
 
     $this->_logItem($this->INFO, print_r(array(
-      'password' => $password,
       'token' => $token
     ), true));
 
