@@ -389,24 +389,31 @@ class Api extends FrontendController
    */
   public function verify()
   {
-    // load user_id from session
-    $user_id = $this->session->userdata('user_id');
+    $verify_info = array();
 
-    // logged-in check
+    /* ********** check that user is logged in ********** */
+    $user_id = $this->session->userdata('user_id');
     if (!$user_id) {
       return $this->json(XHR_AUTH, 'You must be logged-in in order to send a verification email.');
     }
 
+    /* ********** create a new email verification token ********** */
     $this->load->model('userModel');
 
-    // create a new email verification token
     list($token, $email) = $this->userModel->getEmailVerificationToken($user_id);
     if (!$token) {
       return $this->json(XHR_ERROR);
     }
+    $verify_info['token'] = $token;
+    $verify_info['email'] = $email;
 
-    $this->load->library('email');
-    $this->load->library('parser');
+    $this->_logItem($this->INFO, print_r($verify_info, true));
+
+    /* ********** send email with verification link ********** */
+    $maropost_config = config_item('maropost');
+    $maropost_config['campaign_id'] = '3108810';
+    $maropost_config['content_id']  = '2314719';
+    $this->load->library('maropost', $maropost_config);
 
     // find correct "From:" in config/project.php:
     $froms = config_item('from');
@@ -419,15 +426,33 @@ class Api extends FrontendController
       $from_name  = $froms['default']['name'];
     }
 
-    $params = array('link' => 'http://' . $_SERVER['HTTP_HOST'] . '/verify/' . $token);
-    $this->email->clear();
-    $this->email->from($from_email, $from_name);
-    $this->email->to($email);
-    $this->email->subject('Please Verify Your Email Address');
-    $this->email->message($this->parser->parse('../templates/verify', $params, true));
-    $this->email->send();
+    $this->maropost->from(array(
+      'email'    => $from_email,
+      'name'     => $from_name,
+      'reply_to' => config_item('admin_email')
+    ));
 
-    return $this->json(XHR_OK);
+    $this->maropost->to($verify_info['email']);
+    $this->maropost->subject('Please Verify Your Email Address');
+    $this->maropost->tags('verification_link', 'http://' . $_SERVER['HTTP_HOST'] . '/verify/' . $verify_info['token']);
+
+    $response = $this->maropost->send_transaction();
+
+    $recd = $response['recd'];
+    $postfields = print_r($response['sent']['postfields'], true);
+    $info = print_r($response['sent']['info'], true);
+
+    $this->_logItem($this->INFO, "POST data: $postfields");
+    $this->_logItem($this->INFO, "cURL response: $recd");
+
+    // if we didn't get back a 200 OK response, log it and return an error
+    if ($response['sent']['info']['http_code'] !== 200) {
+      $this->_logItem($this->INFO, "cURL info: $info");
+      return $this->json(XHR_ERROR);
+    }
+    else {
+      return $this->json(XHR_OK);
+    }
   }
 
   /**

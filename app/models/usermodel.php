@@ -186,7 +186,7 @@ class UserModel extends CI_Model
   }
 
   /**
-   * Generate a password reset token
+   * Generate a email verification token
    *
    * @param   integer $user_id
    *
