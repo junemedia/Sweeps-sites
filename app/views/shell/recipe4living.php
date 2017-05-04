@@ -180,6 +180,9 @@
               $this->load->view($v, compact('data'));
               }
               ?>
+
+              <?php $this->load->view("ads/$site_slug/lockerdome"); ?>
+
             </div>
           </div>
           <div id="panel-right" class="column">
@@ -192,8 +195,6 @@
               <?php $this->load->view("ads/$site_slug/zergnet-29019"); ?>
 
               <?php $this->load->view("ads/$site_slug/netseer"); ?>
-
-              <?php $this->load->view("ads/$site_slug/outbrain-tf_2"); ?>
 
             </div>
           </div>
@@ -352,7 +353,6 @@
   <?php $this->load->view("ads/$site_slug/underdog"); ?>
   <?php $this->load->view("ads/$site_slug/swoop"); ?>
   <?php $this->load->view("ads/$site_slug/liveconnect"); ?>
-  <?php $this->load->view("ads/$site_slug/outbrain_js"); ?>
 
 </body>
 </html>
