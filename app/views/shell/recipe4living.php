@@ -34,6 +34,9 @@
       $("#solvemedia").hide();
     }
   </script>
+
+  <?php $this->load->view("ads/$site_slug/medianet_js"); ?>
+
 </head>
 
 <body>
@@ -194,7 +197,7 @@
 
               <?php $this->load->view("ads/$site_slug/zergnet-29019"); ?>
 
-              <?php $this->load->view("ads/$site_slug/netseer"); ?>
+              <?php $this->load->view("ads/$site_slug/medianet_rail_300x125"); ?>
 
             </div>
           </div>
