@@ -123,46 +123,30 @@ class Cron extends CI_Controller
 
   protected function sendMail($params)
   {
-    $this->load->library('maropost', config_item('maropost'));
+    $this->load->library('emarsys', config_item('emarsys'));
 
     $params['date_pretty'] = date('F j, Y', strtotime($params['date']));
-
-    // find correct "From:" in config/project.php:
-    $froms = config_item('from');
-    if (@$froms[$params['site_slug']]) {
-      $from_email = $froms[$params['site_slug']]['email'];
-      $from_name  = $froms[$params['site_slug']]['name'];
-    }
-    else {
-      $from_email = $froms['default']['email'];
-      $from_name  = $froms['default']['name'];
-    }
-    $this->maropost->from(array(
-      'email'    => $from_email,
-      'name'     => $from_name,
-      'reply_to' => config_item('admin_email')
-    ));
-
-    $this->maropost->to($params['user_email']);
-    $this->maropost->bcc(config_item('admin_email'));
-    $this->maropost->subject($params['site_name'] . ' Winner Notification');
-
     // remove any HTML tags in the prize title
     $params['prize_title'] = safeTitle($params['prize_title']);
 
-    // tags
-    $this->maropost->tags('winner_email', $params['user_email']);
-    $this->maropost->tags('prize_title', $params['prize_title']);
-    $this->maropost->tags('prize_value', $params['prize_value']);
-    $this->maropost->tags('prize_date', $params['date_pretty']);
-    $this->maropost->tags('site_name', $params['site_name']);
-    $this->maropost->tags('site_domain', $params['site_domain']);
+    $payload = (object)[
+      'key_id'      => '3',
+      'external_id' => $params['user_email'],
+      'data'        => (object)[
+        'winner_email' => $params['user_email'],
+        'prize_title'  => $params['prize_title'],
+        'prize_value'  => $params['prize_value'],
+        'prize_date'   => $params['date_pretty'],
+        'site_name'    => $params['site_name'],
+        'site_domain'  => $params['site_domain']
+      ]
+    ];
 
-    $response = $this->maropost->send_transaction();
+    $response = $this->emarsys->post('event/1262/trigger', json_encode($payload));
 
-    $recd = $response['recd'];
+    $recd       = $response['recd'];
     $postfields = print_r($response['sent']['postfields'], true);
-    $info = print_r($response['sent']['info'], true);
+    $info       = print_r($response['sent']['info'], true);
 
     $this->logItem($this->INFO, "POST data: $postfields");
     $this->logItem($this->INFO, "cURL info: $info");

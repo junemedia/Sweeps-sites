@@ -31,3 +31,8 @@ $config['maropost']['account_id']         = '';
 $config['maropost']['api_key']            = '';
 $config['maropost']['campaign_id']        = '';
 $config['maropost']['content_id']         = '';
+
+// Emarsys account info
+$config['emarsys']['username']            = '';
+$config['emarsys']['secret']              = '';
+$config['emarsys']['api_root']            = '';
