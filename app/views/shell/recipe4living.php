@@ -261,12 +261,11 @@
             <a href="http://www.recipe4living.com/sitemap">Site Map</a>&nbsp;|&nbsp;
             <a href="http://www.recipe4living.com/index/links">Advertising</a>&nbsp;|&nbsp;
             <a href="http://www.recipe4living.com/privacy">Privacy Policy</a>&nbsp;|&nbsp;
-            <a href="http://www.recipe4living.com/terms">Terms of Use</a>&nbsp;|&nbsp;
-            <a href="http://www.recipe4living.com/index/unsub">Unsubscribe</a>&nbsp;|&nbsp;
-            <a href="http://www.recipe4living.com/index/subctr">Manage My Newsletters</a>
+            <a href="http://www.recipe4living.com/terms">Terms of Use</a><!--&nbsp;|&nbsp;-->
+            <!--<a href="http://www.recipe4living.com/index/subctr">Manage My Newsletters</a>-->
           </span>
           <p class="text-content">
-          <br>&copy; 2015 <a href="http://www.junemedia.com/" target="_blank">June Media Inc</a> All rights reserved</p>
+          <br>&copy; <?php echo date('Y'); ?> <a href="http://www.junemedia.com/" target="_blank">June Media Inc</a> All rights reserved</p>
         </div>
       </div>
     </div>
