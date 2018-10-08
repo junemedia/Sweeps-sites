@@ -75,16 +75,6 @@ define([
         // initialize the ad zones
         resetAdZones();
 
-        // Yieldbot.com Intent Tag (fire immediately)
-        // Load Yieldbot first, hydrate the OX_ads
-        // parameters accordingly, and then continue
-        // on to load OpenX tags.
-        scriptAsync(
-            '//cdn.yldbt.com/js/yieldbot.intent.js',
-            yieldbotSuccess,
-            yieldbotFailure
-        );
-
         ourbestbox();
 
         zergnet();
@@ -137,59 +127,6 @@ define([
         }).done(success).fail(failure);
     }
 
-    function yieldbotSuccess() {
-        var yieldbot = W['yieldbot'];
-        yieldbot.pub('d45f');
-        yieldbot.defineSlot('LB');
-        yieldbot.defineSlot('MR');
-        yieldbot.enableAsync();
-        yieldbot.go();
-        // console.log('Yieldbot loaded');
-
-        // load OX tags synchronously (after yieldbot)
-        W['OX_ads'] = [{
-            // Header - 728x90
-            'slot_id': '728x90_ATF',
-            'auid': '537513249',
-            'vars': yieldbot.getSlotCriteria('LB')
-        }, {
-            // Right Rail Above the fold - 300x250
-            'slot_id': '300x250_ATF',
-            'auid': '537513251',
-            'vars': yieldbot.getSlotCriteria('MR')
-        }, {
-            // Right Rail Below the Fold 300x250
-            'slot_id': '300x250_BTF',
-            'auid': '537513252'
-        }, {
-            // Footer - 728x90
-            'slot_id': '728x90_BTF',
-            'auid': '537513250'
-        }];
-
-        // make a deep copy of this tag configuration
-        // to our internal OX_ads_copy
-        $.extend(true, OX_ads_copy, W['OX_ads']);
-
-        scriptAsync(
-            '//junemedia-d.openx.net/w/1.0/jstag',
-            OXSuccess,
-            OXFailure
-        );
-    }
-
-    function yieldbotFailure() {
-        // console.error('Yieldbot failed to load');
-    }
-
-    function OXSuccess() {
-        // console.log('OpenX loaded');
-    }
-
-    function OXFailure() {
-        // console.error('OpenX failed to load');
-    }
-
     function zergnetSuccess() {
         // console.log('Zergnet loaded');
     }
@@ -199,7 +136,6 @@ define([
     }
 
     function zergnet() {
-        // Zergnet ads are independent of Yieldbot/OpenX
         scriptAsync(
             'http://www.zergnet.com/zerg.js?id=29457',
             zergnetSuccess,
@@ -235,9 +171,6 @@ define([
     function refreshAdsNow() {
         // console.debug('Ad refresh at ' + new Date());
         resetAdZones();
-        OX_ads_copy.forEach(function(a) {
-            OX.load(a);
-        });
         zergnet();
         ourbestbox();
     }
