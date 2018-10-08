@@ -120,7 +120,6 @@
     });
   </script>
 
-  <?php $this->load->view("ads/$site_slug/underdog"); ?>
   <?php $this->load->view("ads/$site_slug/liveconnect"); ?>
 
 </body>
