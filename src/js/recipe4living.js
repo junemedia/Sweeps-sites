@@ -9,30 +9,6 @@ define([
         AD_REFRESH_TIME_LIMIT = 4000;
 
 
-    function openx() {
-        // set the OpenX configuration every time we refresh, /jstag JS will delete it
-        W['OX_ads'] = [{
-            // Header - 728x90
-            'slot_id': '728x90_ATF',
-            'auid': '537614199'
-        }, {
-            // Right Rail Above the fold - 300x250
-            'slot_id': '300x250_ATF',
-            'auid': '537614197'
-        }, {
-            // Right Rail Below the Fold 300x250
-            'slot_id': '300x250_BTF',
-            'auid': '537614198'
-        }, {
-            // Footer - 728x90
-            'slot_id': '728x90_BTF',
-            'auid': '537614200'
-        }];
-
-        getScript('//junemedia-d.openx.net/w/1.0/jstag');
-    }
-
-
     function zergnet() {
         // Zergnet ads are independent of OpenX
         getScript('http://www.zergnet.com/zerg.js?id=29019');
@@ -100,7 +76,6 @@ define([
     function refreshAdsNow() {
         console.debug('Ad refresh at ' + new Date());
         resetAdZones();
-        openx();
         zergnet();
     }
 

@@ -85,11 +85,6 @@
   <!--Sticky Menu-->
   <script src="http://www.recipe4living.com/frontend/base/js/stickymenu.js"></script>
   <div id="nav-header">
-    <div class="site-wrapper" id="top-ad">
-      <div class="screenonly">
-        <div class="ad" data-id="728x90_ATF"></div>
-      </div>
-    </div>
     <div class="site-wrapper">
       <div id="logo">
         <a href="/"><img style="width:387px;margin-left: -5px;" class="screenonly" alt="Recipe4Living" src="http://www.recipe4living.com/frontend/recipe4living/images/site/R4L-Homepage-Logo.png"/></a>
@@ -189,11 +184,8 @@
             </div>
           </div>
           <div id="panel-right" class="column">
-            <div class="ad" data-id="300x250_ATF"></div>
-            <div class="clear"></div>
 
             <div class="ad">
-              <div class="ad" data-id="300x250_BTF"></div>
 
               <?php $this->load->view("ads/$site_slug/zergnet-29019"); ?>
 
@@ -206,7 +198,6 @@
       </div>
       <!-- INFOLINKS_OFF -->
       <div class="clear"></div>
-      <div class="ad" data-id="728x90_BTF" id="footer-ad"></div>
     </div>
   </div>
   <div id="footer" class="site-wrapper screenonly">
