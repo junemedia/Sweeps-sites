@@ -22,6 +22,8 @@
 
   <meta name="msvalidate.01" content="E03168D9BB4076DC3C37E21B03C7EE91"/>
 
+  <?php $this->load->view("ads/$site_slug/adthrive_js"); ?>
+
   <script type="text/javascript">
     function solvemedia()
     {
