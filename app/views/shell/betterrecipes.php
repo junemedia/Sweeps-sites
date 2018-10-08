@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="<?= $assets['/css/betterrecipes.css'] ?>"/>
   <link rel="shortcut icon" href="http://www.betterrecipes.com/favicon.ico"/>
 
+  <?php $this->load->view("ads/$site_slug/adthrive_js"); ?>
+
   <script type="text/javascript">
     function solvemedia()
     {
