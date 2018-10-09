@@ -287,24 +287,6 @@
   <script async src="http://i.simpli.fi/dpx.js?cid=6272&m=1"></script>
   <!-- end of matchflowmedia.com tags -->
 
-  <script>
-    try {
-        var w = top,
-            guid = 'dRKpBGeA8r5kFwacwqm_6l';
-        if (w.document.location.protocol == 'http:') {
-            w.Tynt = w.Tynt || [];
-            w.Tynt.push(guid);
-            var s = w.document.createElement('script');
-            s.async = "async";
-            s.type = "text/javascript";
-            s.src = 'http://tcr.tynt.com/ti.js';
-            var h = w.document.getElementsByTagName('script')[0];
-            h.parentNode.insertBefore(s, h);
-        }
-    }
-    catch (e) {}
-  </script>
-
   <?php
     if (@$solvemedia) {
       $this->load->view('partials/captcha');
