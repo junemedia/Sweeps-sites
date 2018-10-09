@@ -270,23 +270,6 @@
       quantserve();
   </script>
 
-  <!-- start of matchflowmedia.com tags -->
-  <iframe src="//CLIENTS.BLUECAVA.COM/data/?p=54e940be-0063-4a66-be74-f2b37a831761&sid=31&cat=recipes" width="0" height="0" frameBorder="0" scrolling="no"></iframe>
-  <script>
-    try {
-      (function() {
-        var s = document.createElement("script");
-        s.defer = true;
-        s.src = "//tag.crsspxl.com/s1.js?d=1530";
-        var s0 = document.getElementsByTagName('script')[0];
-        s0.parentNode.insertBefore(s, s0);
-      })();
-    }
-    catch (e) {}
-  </script>
-  <script async src="http://i.simpli.fi/dpx.js?cid=6272&m=1"></script>
-  <!-- end of matchflowmedia.com tags -->
-
   <?php
     if (@$solvemedia) {
       $this->load->view('partials/captcha');
