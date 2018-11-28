@@ -203,65 +203,64 @@
     </div>
   </div>
   <div id="footer" class="site-wrapper screenonly">
-    <div style="text-align: center; margin: 0px; padding-bottom: 0px;background-color: background:#e2ded5;"> <img src="http://www.recipe4living.com/frontend/recipe4living/images/site/FamilyOfSites.png" border="0"/> </div>
-    <div style="width: 980px;" id="mainFooterDiv">
-      <div class="rssdiv" id="ffrss">
-        <ol class="rssfeed">
-          <div id="li_item"><a target="_blank" title="Watermelon Fruit Bowl" href="http://www.fitandfabliving.com/recipes/recipe-tips/10691-watermelon-fruit-bowl">Watermelon Fruit Bowl</a> </div>
-          <div id="li_item"><a target="_blank" title="Cantaloupe Ball Bowl" href="http://www.fitandfabliving.com/recipes/recipe-tips/10673-cantaloupe-ball-bowl">Cantaloupe Ball Bowl</a> </div>
-          <div id="li_item"><a target="_blank" title="Cantaloupe Fruit Salad " href="http://www.fitandfabliving.com/recipes/recipe-tips/10675-cantaloupe-fruit-salad">Cantaloupe Fruit Salad </a> </div>
-          </li>
-        </div>
-        <div class="rssdiv" id="wimrss">
+
+    <div style="text-align: center; margin: 0px; padding-bottom: 0px;">
+      <img src="http://www.recipe4living.com/frontend/recipe4living/images/site/FamilyOfSites.png" border="0"/>
+    </div>
+
+    <div id="mainFooterDiv">
+      <div class="rssdiv">
+        <div class="ffrss">
+          <a href="http://www.fitandfabliving.com/" id="box-link-ff">Fit and Fab Living</a>
+
           <ol class="rssfeed">
-            <div id="li_item"> <a target="_blank" title="Spring Fashion For Little Girls" href="http://www.workitmom.com/articles/detail/201343/spring-fashion-for-little-girls">
-                Spring Fashion For Little...            </a> </div>
-            <div id="li_item"> <a target="_blank" title="Sweet Strawberry Reduction" href="http://www.workitmom.com/articles/detail/201339/sweet-strawberry-reduction">
-                Sweet Strawberry Reduction            </a> </div>
-            <div id="li_item"> <a target="_blank" title="Nutella Smoothie" href="http://www.workitmom.com/articles/detail/201337/nutella-smoothie">
-                Nutella Smoothie            </a> </div>
+            <div id="li_item"><a target="_blank" title="Watermelon Fruit Bowl" href="http://www.fitandfabliving.com/recipes/recipe-tips/10691-watermelon-fruit-bowl">Watermelon Fruit Bowl</a> </div>
+            <div id="li_item"><a target="_blank" title="Cantaloupe Ball Bowl" href="http://www.fitandfabliving.com/recipes/recipe-tips/10673-cantaloupe-ball-bowl">Cantaloupe Ball Bowl</a> </div>
+            <div id="li_item"><a target="_blank" title="Cantaloupe Fruit Salad " href="http://www.fitandfabliving.com/recipes/recipe-tips/10675-cantaloupe-fruit-salad">Cantaloupe Fruit Salad </a> </div>
+            </li>
           </ol>
         </div>
-        <div class="rssdiv" id="rwmrss">
+
+        <div class="wimrss">
+          <a href="http://www.workitmom.com/" id="box-link-wim">Work It Mom!</a>
+
+          <ol class="rssfeed">
+            <div id="li_item"><a target="_blank" title="Spring Fashion For Little Girls" href="http://www.workitmom.com/articles/detail/201343/spring-fashion-for-little-girls">Spring Fashion For Little...</a></div>
+            <div id="li_item"><a target="_blank" title="Sweet Strawberry Reduction" href="http://www.workitmom.com/articles/detail/201339/sweet-strawberry-reduction">Sweet Strawberry Reduction</a></div>
+            <div id="li_item"><a target="_blank" title="Nutella Smoothie" href="http://www.workitmom.com/articles/detail/201337/nutella-smoothie">Nutella Smoothie</a></div>
+          </ol>
+        </div>
+
+        <div class="rwmrss">
+          <a href="http://www.savvyfork.com/" id="box-link-rwm">Savvy Fork</a>
+
           <ol class="rssfeed">
             <div id="li_item"><a target="_blank" title="Beautiful Appetizer Recipes" href="http://www.savvyfork.com/component/yoorecipe/category/11-appetizers.html">Beautiful Appetizer Recipes</a></div>
             <div id="li_item"><a target="_blank" title="Sumptuous Main Dish Recipes" href="http://www.savvyfork.com/component/yoorecipe/category/13-main-dishes.html">Sumptuous Main Dish Recipes</a></div>
             <div id="li_item"><a target="_blank" title="Gorgeous Dessert Recipes" href="http://www.savvyfork.com/component/yoorecipe/category/15-desserts.html">Gorgeous Dessert Recipes</a></div>
           </ol>
         </div>
-        <div class="rssdiv" id="cotrss">
-          <ol class="rssfeed">
-            <div id="li_item"> <a target="_blank" title="Unholy Cannoli!" href="http://www.chewonthatblog.com/2014/10/31/unholy-cannoli/">
-                Unholy Cannoli!            </a> </div>
-            <div id="li_item"> <a target="_blank" title="Join us Tonight at 7pm CT for our ?#Chocoholic? National Chocolate Day Twitter Party" href="http://www.chewonthatblog.com/2014/10/28/join-us-tonight-at-7pm-ct-for-our-chocoholic-national-chocolat-day-twitter-party/">
-                Join us Tonight at 7pm CT for...            </a> </div>
-            <div id="li_item"> <a target="_blank" title="Join us Tonight at 7pm CT for our ?#MyMug? National Coffee Day Twitter Party" href="http://www.chewonthatblog.com/2014/09/29/join-us-tonight-at-7pm-ct-for-our-mymug-national-coffee-day-twitter-party/">
-                Join us Tonight at 7pm CT for...            </a> </div>
-          </ol>
-        </div>
-        <div style="clear: left;"></div>
-        <div class="mainFooterDiv">
-          <a target="_blank" id="box-link-ff" href="http://www.fitandfabliving.com/"></a>
-          <a target="_blank" id="box-link-wim" href="http://www.workitmom.com/"></a>
-          <a target="_blank" id="box-link-rwm" href="http://www.savvyfork.com/"></a>
-          <a target="_blank" id="box-link-cot" href="http://www.chewonthatblog.com/"></a>
-        </div>
-        <div style="clear: left;"></div>
-        <div id="topLinks" style="text-align: center;padding-top:150px;"> <span style="padding-left: 0px;">
-            <a href="http://www.recipe4living.com/about">About Us</a>&nbsp;|&nbsp;
-            <a href="http://www.recipe4living.com/contact/">Contact Us</a>&nbsp;|&nbsp;
-            <a href="http://www.recipe4living.com/press">Press Room</a>&nbsp;|&nbsp;
-            <a href="http://www.recipe4living.com/sitemap">Site Map</a>&nbsp;|&nbsp;
-            <a href="http://www.recipe4living.com/index/links">Advertising</a>&nbsp;|&nbsp;
-            <a href="http://www.recipe4living.com/privacy">Privacy Policy</a>&nbsp;|&nbsp;
-            <a href="http://www.recipe4living.com/terms">Terms of Use</a><!--&nbsp;|&nbsp;-->
-            <!--<a href="http://www.recipe4living.com/index/subctr">Manage My Newsletters</a>-->
-          </span>
-          <p class="text-content">
-          <br>&copy; <?php echo date('Y'); ?> <a href="http://www.junemedia.com/" target="_blank">June Media Inc</a> All rights reserved</p>
-        </div>
+
+        <div style="float:none; width: 100%; clear: left;"></div>
+      </div>
+
+      <div id="topLinks" style="text-align: center;">
+        <span style="padding-left: 0px;">
+          <a href="http://www.recipe4living.com/about">About Us</a>&nbsp;|&nbsp;
+          <a href="http://www.recipe4living.com/contact/">Contact Us</a>&nbsp;|&nbsp;
+          <a href="http://www.recipe4living.com/press">Press Room</a>&nbsp;|&nbsp;
+          <a href="http://www.recipe4living.com/sitemap">Site Map</a>&nbsp;|&nbsp;
+          <a href="http://www.recipe4living.com/index/links">Advertising</a>&nbsp;|&nbsp;
+          <a href="http://www.recipe4living.com/privacy">Privacy Policy</a>&nbsp;|&nbsp;
+          <a href="http://www.recipe4living.com/terms">Terms of Use</a><!--&nbsp;|&nbsp;-->
+          <!--<a href="http://www.recipe4living.com/index/subctr">Manage My Newsletters</a>-->
+        </span>
+        <p class="text-content"><br>&copy; <?php echo date('Y'); ?> <a href="http://www.junemedia.com/" target="_blank">June Media Inc</a> All rights reserved</p>
       </div>
     </div>
+
+  </div>
+
   <div class="clear"></div>
 
   <script src="http://edge.quantserve.com/quant.js"></script>
