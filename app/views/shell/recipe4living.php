@@ -89,8 +89,8 @@
   <div id="nav-header">
     <div class="site-wrapper">
       <div id="logo">
-        <a href="/"><img style="width:387px;margin-left: -5px;" class="screenonly" alt="Recipe4Living" src="http://www.recipe4living.com/frontend/recipe4living/images/site/R4L-Homepage-Logo.png"/></a>
-        <a href="/"><img class="printonly" alt="Recipe4Living" src="http://www.recipe4living.com/frontend/recipe4living/images/site/R4L-Homepage-Logo.png"/></a>
+        <a href="http://www.recipe4living.com"><img style="width:387px;margin-left: -5px;" class="screenonly" alt="Recipe4Living" src="http://www.recipe4living.com/frontend/recipe4living/images/site/R4L-Homepage-Logo.png"/></a>
+        <a href="http://www.recipe4living.com"><img class="printonly" alt="Recipe4Living" src="http://www.recipe4living.com/frontend/recipe4living/images/site/R4L-Homepage-Logo.png"/></a>
       </div>
       <div class="tagline">
         <h4>Easy recipes and a helping of fun from home cooks like you.</h4></div>
@@ -101,7 +101,7 @@
           </ul-->
         </div>
         <div class="formholder">
-          <form id="nav-top-form-search" action="/search" method="get" class="search fullsubmit">
+          <form id="nav-top-form-search" action="http://www.recipe4living.com/search" method="get" class="search fullsubmit">
             <div>
               <div class="categories">
                 <label class="radio">
@@ -123,7 +123,7 @@
     <div class="site-wrapper">
       <ul id="nav-top-list">
         <li class="parent home">
-        <div class="nav-item"> <a href="/"><span>Home</span></a> </div>
+        <div class="nav-item"> <a href="http://www.recipe4living.com"><span>Home</span></a> </div>
         </li>
         <li class="parent recipes drops">
         <div class="nav-item"> <a href="http://www.recipe4living.com/recipes"><span>Recipes</span></a> </div>
