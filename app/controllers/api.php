@@ -216,11 +216,16 @@ class Api extends FrontendController
 
     // Lookup city/state
     if ($this->input->post('zip')) {
-      $this->load->library('RDGeo');
-      $geo = $this->rdgeo->lookup($this->input->post('zip'));
-      if (!@$geo || !@$geo['city'] || !@$geo['state']) {
-        return $this->json(XHR_INVALID, 'Invalid Zip Code');
-      }
+      $geo = array(
+        'city' => null,
+        'state' => null
+      );
+      /** Stopped working... */
+      /* $this->load->library('RDGeo'); */
+      /* $geo = $this->rdgeo->lookup($this->input->post('zip')); */
+      /* if (!@$geo || !@$geo['city'] || !@$geo['state']) { */
+      /*   return $this->json(XHR_INVALID, 'Invalid Zip Code'); */
+      /* } */
     }
 
     // Set the profile to be passed to Registration Services
