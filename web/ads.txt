@@ -1,5 +1,5 @@
 # ads.txt
-# 2019-02-15
+# 2019-04-10
 # ----------------------------------------------------------------------
 
 
@@ -88,3 +88,13 @@ triplelift.com, 6294, DIRECT, 6c33edb13117fd86 #banner
 oathprebid.com, 108, DIRECT #banner
 pubmatic.com, 157852, DIRECT, 5d62403b186f2ace #banner
 yieldmo.com, 2144304518241355475, DIRECT #banner
+
+
+#   LiveIntent
+# ----------------------------------------------------------------------
+liveintent.com, 783, DIRECT
+liveintent.com, 4510, DIRECT
+liveintent.com, 47467, DIRECT
+liveintent.com, 47468, DIRECT
+liveintent.com, 47469, DIRECT
+liveintent.com, 47470, DIRECT
