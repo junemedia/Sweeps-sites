@@ -86,6 +86,16 @@ lkqd.net, 244, RESELLER, 59c49fa9598a0117 #video
 appnexus.com, 1314, RESELLER, 6c33edb13117fd86 #banner
 
 
+#   Lockerdome (R4L)
+# ----------------------------------------------------------------------
+lockerdome.com, 8567891478090497, DIRECT
+
+
+#   Media.net (R4L)
+# ----------------------------------------------------------------------
+media.net, 8CU52X6SM, Direct
+
+
 #   LiveIntent
 # ----------------------------------------------------------------------
 liveintent.com, 783, DIRECT
