@@ -104,8 +104,8 @@ class FrontendController extends SweepsController
             $this->db->where('domain', $_SERVER['HTTP_HOST']);
         }
         else {
-            // development/staging domains must have the `slug` in the format stage.win.SLUG.com
-            if (!preg_match('/^stage\.win\.(recipe4living|betterrecipes)\.com/', $_SERVER['HTTP_HOST'], $m)) {
+            // development/staging domains must have the `slug` in the format stagewin.SLUG.com
+            if (!preg_match('/^stagewin\.(recipe4living|betterrecipes)\.com/', $_SERVER['HTTP_HOST'], $m)) {
                 show_404();
             }
             $this->db->where('slug', $m[1]);
